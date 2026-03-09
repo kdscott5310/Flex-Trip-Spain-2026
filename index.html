@@ -1235,6 +1235,164 @@
     border-color: rgba(201,168,76,0.4);
     color: var(--gold);
   }
+
+  /* ─── SUGGESTIONS ─── */
+  #suggestions {
+    padding: var(--section-pad) 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    background: rgba(201,168,76,0.02);
+  }
+  #suggestions h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--cream);
+  }
+  .suggestions-sub {
+    text-align: center;
+    color: var(--warm-gray);
+    font-size: 0.85rem;
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+  .suggestions-layout {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 680px) {
+    .suggestions-layout { grid-template-columns: 1fr; }
+  }
+  .suggestions-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .suggestion-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+  }
+  .suggestion-step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+    width: 24px;
+    margin-top: 1px;
+  }
+  .suggestion-step-text {
+    font-size: 0.82rem;
+    color: #B0A89E;
+    line-height: 1.6;
+  }
+  .suggestion-step-text strong { color: var(--cream); }
+  .suggestions-form-panel {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+  }
+  .suggestions-form-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(201,168,76,0.05);
+  }
+  .suggestions-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cream);
+  }
+  .suggestions-form-badge {
+    margin-left: auto;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(76,175,80,0.15);
+    border: 1px solid rgba(76,175,80,0.3);
+    color: #4CAF50;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  .suggestions-form-body {
+    padding: 20px;
+  }
+  .suggest-open-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--dark);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+    text-decoration: none;
+    margin-bottom: 14px;
+  }
+  .suggest-open-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .suggest-open-btn span { font-size: 1.1rem; }
+  .suggest-inline-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    padding: 9px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    color: var(--warm-gray);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .suggest-inline-toggle:hover { border-color: rgba(255,255,255,0.15); color: var(--cream); }
+  .suggest-iframe-wrapper {
+    display: none;
+    margin-top: 14px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .suggest-iframe-wrapper.open { display: block; }
+  .suggest-iframe-wrapper iframe {
+    width: 100%;
+    height: 520px;
+    border: none;
+    background: white;
+    display: block;
+  }
+  .suggestions-note {
+    margin-top: 14px;
+    font-size: 0.74rem;
+    color: var(--warm-gray);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .suggestions-note a { color: var(--gold); text-decoration: none; }
 </style>
 </head>
 <body>
@@ -1282,6 +1440,7 @@
   <a href="#map-section" class="list-link">🗺️ Map</a>
   <a href="#tools" class="list-link">🛠️ Tools</a>
   <a href="#phrases" class="list-link">🗣️ Phrases</a>
+  <a href="#suggestions" class="list-link">💬 Suggest</a>
 </nav>
 
 <!-- ════════════════ LEG 1: BARCELONA ════════════════ -->
@@ -2616,6 +2775,67 @@
   </div>
 </section>
 
+<!-- ════════════════ SUGGESTIONS ════════════════ -->
+<section id="suggestions">
+  <h2>💬 Suggest a Change</h2>
+  <p class="suggestions-sub">Got a better restaurant idea? Want to swap an activity?<br>Submit your suggestion and it goes straight to the trip organiser.</p>
+
+  <div class="suggestions-layout">
+
+    <div class="suggestions-info">
+      <div class="suggestion-step">
+        <div class="suggestion-step-num">1</div>
+        <div class="suggestion-step-text"><strong>Pick a leg</strong> — let us know if your suggestion is for Barcelona, Ibiza, the Finale, or Mallorca.</div>
+      </div>
+      <div class="suggestion-step">
+        <div class="suggestion-step-num">2</div>
+        <div class="suggestion-step-text"><strong>Describe your idea</strong> — a restaurant swap, a different beach club, an activity, anything. The more detail the better.</div>
+      </div>
+      <div class="suggestion-step">
+        <div class="suggestion-step-num">3</div>
+        <div class="suggestion-step-text"><strong>Rate the priority</strong> — nice to have, important, or must change. Helps the organiser triage quickly.</div>
+      </div>
+      <div class="suggestion-step">
+        <div class="suggestion-step-num">4</div>
+        <div class="suggestion-step-text"><strong>Hit submit</strong> — your suggestion lands in a shared Google Sheet. The organiser reviews all suggestions and updates the itinerary here.</div>
+      </div>
+      <div style="padding:14px 16px;background:rgba(30,140,106,0.06);border:1px solid rgba(30,140,106,0.2);border-radius:10px;font-size:0.78rem;color:#5FD4A8;line-height:1.6;">
+        ✅ <strong>All suggestions are reviewed.</strong> If your idea makes the cut, the itinerary gets updated and re-published — everyone on the link sees the change automatically.
+      </div>
+    </div>
+
+    <div class="suggestions-form-panel">
+      <div class="suggestions-form-header">
+        <span style="font-size:1.2rem;">📝</span>
+        <span class="suggestions-form-title">Trip Suggestion Form</span>
+        <span class="suggestions-form-badge">Live</span>
+      </div>
+      <div class="suggestions-form-body">
+        <a class="suggest-open-btn"
+           href="https://docs.google.com/forms/d/e/1FAIpQLSexd_prqG9XHv5dCJlfYTOANt4DqdEc_tJXCtg7V20zpwdBlw/viewform?usp=header"
+           target="_blank">
+          <span>📝</span> Open Suggestion Form
+        </a>
+        <button class="suggest-inline-toggle" onclick="toggleInlineForm(this)">
+          ↕ Or fill it in right here
+        </button>
+        <div class="suggest-iframe-wrapper" id="suggest-iframe-wrapper">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSexd_prqG9XHv5dCJlfYTOANt4DqdEc_tJXCtg7V20zpwdBlw/viewform?embedded=true"
+            title="Trip Suggestion Form">
+            Loading form…
+          </iframe>
+        </div>
+        <p class="suggestions-note">
+          Responses are collected by the trip organiser via Google Sheets.<br>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSexd_prqG9XHv5dCJlfYTOANt4DqdEc_tJXCtg7V20zpwdBlw/viewform?usp=header" target="_blank">Open in full screen →</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <span class="footer-flag">🇪🇸</span>
@@ -2997,6 +3217,14 @@
     el.classList.add('copied');
     setTimeout(() => el.classList.remove('copied'), 1500);
   }
+  // ─── SUGGESTIONS inline form toggle ───
+  function toggleInlineForm(btn) {
+    const wrapper = document.getElementById('suggest-iframe-wrapper');
+    const isOpen = wrapper.classList.contains('open');
+    wrapper.classList.toggle('open');
+    btn.textContent = isOpen ? '↕ Or fill it in right here' : '↑ Hide inline form';
+  }
+
 </script>
 
 </body>
