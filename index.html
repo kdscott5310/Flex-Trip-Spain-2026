@@ -2264,12 +2264,13 @@
 <!-- ════════════════ CHECKLIST ════════════════ -->
 <section id="rsvp">
   <h2>🙋 Who's Coming?</h2>
-  <p class="rsvp-sub">Add your name and mark which legs you're joining · Data stays in your browser</p>
+  <p class="rsvp-sub">Add your name and mark which legs you're joining · Shared live with the whole group</p>
 
   <div class="rsvp-add">
     <input class="rsvp-input" id="rsvp-name-input" type="text" placeholder="Enter your name…" maxlength="24" />
     <button class="rsvp-btn" onclick="rsvpAdd()">Add Me</button>
   </div>
+  <div id="rsvp-status" style="display:none;text-align:center;font-size:0.78rem;margin-bottom:12px;transition:all 0.3s;"></div>
 
   <div class="rsvp-legs">
     <div class="rsvp-leg-card">
@@ -2942,31 +2943,27 @@
   setInterval(updateCountdown, 1000);
 
   // ─── RSVP ───
-  const RSVP_KEY = 'spain2026_rsvp';
+  // ─── RSVP — Google Sheets backend ───
+  const RSVP_API = 'https://script.google.com/macros/s/AKfycbzhxDmmDcXvb_e6wiH7bc915a1TQS3eSpBuRLFT0RRLlI2ebufMLG_uPo3Gua9WMhxZ/exec';
   const AVATAR_COLORS = ['#D4385A','#2E86AB','#7B5EA7','#C9A84C','#4CAF50','#FF6B6B','#45B7D1','#96CEB4'];
 
-  function loadRsvp() {
-    try { return JSON.parse(localStorage.getItem(RSVP_KEY)) || { bcn1:[], ibz:[], fin:[], mal:[] }; }
-    catch { return { bcn1:[], ibz:[], fin:[], mal:[] }; }
-  }
-  function saveRsvp(data) {
-    try { localStorage.setItem(RSVP_KEY, JSON.stringify(data)); } catch {}
-  }
+  // Local cache so the UI stays snappy
+  let rsvpCache = { bcn1:[], ibz:[], fin:[], mal:[] };
 
   function renderRsvp() {
-    const data = loadRsvp();
     ['bcn1','ibz','fin','mal'].forEach(leg => {
       const container = document.getElementById('people-' + leg);
-      const countEl = document.getElementById('count-' + leg);
-      const people = data[leg] || [];
+      const countEl   = document.getElementById('count-' + leg);
+      if (!container || !countEl) return;
+      const people = rsvpCache[leg] || [];
       countEl.textContent = people.length + ' going';
       if (people.length === 0) {
         container.innerHTML = '<span class="rsvp-empty">No one added yet</span>';
         return;
       }
       container.innerHTML = people.map((name, i) => {
-        const color = AVATAR_COLORS[i % AVATAR_COLORS.length];
-        const initials = name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+        const color    = AVATAR_COLORS[i % AVATAR_COLORS.length];
+        const initials = name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
         return `<div class="rsvp-person">
           <div class="rsvp-avatar" style="background:${color}">${initials}</div>
           ${name}
@@ -2976,41 +2973,92 @@
     });
   }
 
-  function rsvpAdd() {
-    const input = document.getElementById('rsvp-name-input');
-    const name = input.value.trim();
-    if (!name) return;
-    const data = loadRsvp();
-    // Add to all legs by default, show modal-style selection
-    const legs = ['bcn1','ibz','fin','mal'];
-    const legNames = ['Barcelona (May 17–18, 2026)','Ibiza (May 21–23, 2026)','Barcelona Finale (May 23–25, 2026)','Mallorca (May 18–21, 2026)'];
-    const choices = [];
-    for (let i = 0; i < legs.length; i++) {
-      if (confirm(`Is ${name} joining: ${legNames[i]}?`)) {
-        choices.push(legs[i]);
+  function setRsvpStatus(msg, color) {
+    const el = document.getElementById('rsvp-status');
+    if (!el) return;
+    el.textContent = msg;
+    el.style.color = color || 'var(--warm-gray)';
+    el.style.display = msg ? 'block' : 'none';
+  }
+
+  async function fetchRsvps() {
+    setRsvpStatus('Loading…', 'var(--warm-gray)');
+    try {
+      const res  = await fetch(RSVP_API);
+      const json = await res.json();
+      if (json.ok) {
+        rsvpCache = Object.assign({ bcn1:[], ibz:[], fin:[], mal:[] }, json.rsvps);
+        renderRsvp();
+        setRsvpStatus('');
+      } else {
+        setRsvpStatus('Could not load RSVPs.', '#F0889A');
       }
+    } catch {
+      setRsvpStatus('Offline — showing cached data.', 'var(--warm-gray)');
+      renderRsvp();
     }
-    choices.forEach(leg => {
-      if (!data[leg].includes(name)) data[leg].push(name);
+  }
+
+  async function postRsvp(name, leg, action) {
+    try {
+      await fetch(RSVP_API, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, leg, action })
+      });
+    } catch {
+      // no-cors means we can't read the response — that's fine, write still goes through
+    }
+  }
+
+  async function rsvpAdd() {
+    const input = document.getElementById('rsvp-name-input');
+    const name  = input.value.trim();
+    if (!name) return;
+
+    const legs     = ['bcn1','ibz','fin','mal'];
+    const legNames = ['Barcelona (May 17–18)','Ibiza (May 21–23)','Barcelona Finale (May 23–25)','Mallorca (May 18–21)'];
+    const chosen   = [];
+    for (let i = 0; i < legs.length; i++) {
+      if (confirm(`Is ${name} joining: ${legNames[i]}?`)) chosen.push(legs[i]);
+    }
+    if (chosen.length === 0) return;
+
+    // Optimistic update — show immediately
+    chosen.forEach(leg => {
+      if (!rsvpCache[leg].includes(name)) rsvpCache[leg].push(name);
     });
-    saveRsvp(data);
     renderRsvp();
     input.value = '';
     input.focus();
+    setRsvpStatus('Saving…', 'var(--warm-gray)');
+
+    // Write each leg to Sheets
+    await Promise.all(chosen.map(leg => postRsvp(name, leg, 'add')));
+    setRsvpStatus('✓ Saved to shared list!', '#4CAF50');
+    setTimeout(() => setRsvpStatus(''), 3000);
   }
 
-  function rsvpRemove(leg, name) {
-    const data = loadRsvp();
-    data[leg] = data[leg].filter(n => n !== name);
-    saveRsvp(data);
+  async function rsvpRemove(leg, name) {
+    // Optimistic update
+    rsvpCache[leg] = rsvpCache[leg].filter(n => n !== name);
     renderRsvp();
+    setRsvpStatus('Removing…', 'var(--warm-gray)');
+    await postRsvp(name, leg, 'remove');
+    setRsvpStatus('✓ Removed.', '#4CAF50');
+    setTimeout(() => setRsvpStatus(''), 2000);
   }
 
   document.getElementById('rsvp-name-input').addEventListener('keydown', e => {
     if (e.key === 'Enter') rsvpAdd();
   });
 
-  renderRsvp();
+  // Load live data on page open
+  fetchRsvps();
+
+  // Refresh every 30 seconds so new RSVPs from others appear automatically
+  setInterval(fetchRsvps, 30000);
 
   // ─── MAP FILTER ───
   // ─── CUSTOM SVG MAP ───
