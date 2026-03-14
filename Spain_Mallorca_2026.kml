@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Spain &amp; Mallorca 2026 — Group Trip</name>
+  <description>All venues for BCN · Mallorca · Ibiza · BCN Finale — May 2026. Color coded by leg. Import into Google My Maps.</description>
+  <Style id="style_bcn">
+    <IconStyle>
+      <color>ff5a38d4</color>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.9</scale></LabelStyle>
+    <BalloonStyle>
+      <text><![CDATA[<b>$[name]</b><br/>$[description]]]></text>
+    </BalloonStyle>
+  </Style>
+  <Style id="style_mal">
+    <IconStyle>
+      <color>ff6a8c1e</color>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.9</scale></LabelStyle>
+    <BalloonStyle>
+      <text><![CDATA[<b>$[name]</b><br/>$[description]]]></text>
+    </BalloonStyle>
+  </Style>
+  <Style id="style_ibz">
+    <IconStyle>
+      <color>ffab862e</color>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/blu-circle.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.9</scale></LabelStyle>
+    <BalloonStyle>
+      <text><![CDATA[<b>$[name]</b><br/>$[description]]]></text>
+    </BalloonStyle>
+  </Style>
+  <Style id="style_fin">
+    <IconStyle>
+      <color>ffa75e7b</color>
+      <scale>1.1</scale>
+      <Icon><href>http://maps.google.com/mapfiles/kml/paddle/purple-circle.png</href></Icon>
+    </IconStyle>
+    <LabelStyle><scale>0.9</scale></LabelStyle>
+    <BalloonStyle>
+      <text><![CDATA[<b>$[name]</b><br/>$[description]]]></text>
+    </BalloonStyle>
+  </Style>
+  <Folder>
+    <name>Leg 1 — Barcelona (May 17–18)</name>
+    <open>1</open>
+    <Placemark>
+      <name>La Roca Village Outlet</name>
+      <description>🛍️ BCN Leg 1 · May 17
+Gucci, Prada, Loewe, Saint Laurent. Sign up for free Hands-Free Shopping membership on arrival.
+Open 10AM–9PM · 40 min from city</description>
+      <styleUrl>#style_bcn</styleUrl>
+      <Point><coordinates>2.33,41.614,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Vinitus Barcelona</name>
+      <description>🍽️ BCN Leg 1 · May 17 · Dinner
+Carrer del Consell de Cent 333 · ⭐4.4
+Best tapas in Eixample — pintxos, anchovies, jamón croquetas, grilled octopus.
+Book for 8 · vinitus.com · +34 934 53 47 48</description>
+      <styleUrl>#style_bcn</styleUrl>
+      <Point><coordinates>2.163,41.391,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Sagrada Família</name>
+      <description>⛪ BCN Leg 1 · May 18 · 9AM
+€26–36/person · Timed entry only — must book online.
+Allow 2–2.5 hrs · sagradafamilia.org</description>
+      <styleUrl>#style_bcn</styleUrl>
+      <Point><coordinates>2.174,41.404,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>Leg 2 — Mallorca (May 18–21)</name>
+    <open>1</open>
+    <Placemark>
+      <name>Zel Mallorca — Hotel</name>
+      <description>🏨 Mallorca Leg 2 · May 18–21
+Duque de Extremera 16, Palmanova
+Beachfront 5★ hotel · Best breakfast buffet in Spain
+Check-in May 18 ~16:15 · +34 971 68 01 50</description>
+      <styleUrl>#style_mal</styleUrl>
+      <Point><coordinates>2.489,39.519,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Restaurant Illeta</name>
+      <description>🍽️ Mallorca Leg 2 · May 18 · Dinner 8:15PM
+Camp de Mar · NO walk-ins · Book immediately
+~€45–60/person · +34 637 077 870</description>
+      <styleUrl>#style_mal</styleUrl>
+      <Point><coordinates>2.41,39.535,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Valldemossa Monastery</name>
+      <description>⛪ Mallorca Leg 2 · May 19 · Morning
+UNESCO Tramuntana · ~€10/person
+cartuxa.es · Book combined ticket with tower</description>
+      <styleUrl>#style_mal</styleUrl>
+      <Point><coordinates>2.622,39.712,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Deia Village</name>
+      <description>🏘️ Mallorca Leg 2 · May 19 · Late Morning
+Free · Stunning cliffside village between Valldemossa and Sóller
+Stop for photos and a coffee</description>
+      <styleUrl>#style_mal</styleUrl>
+      <Point><coordinates>2.648,39.747,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Ca'n Costa</name>
+      <description>🍽️ Mallorca Leg 2 · May 19 · Lunch
+Lunch only Mon–Sat · ~€35–45/person
++34 971 612 263</description>
+      <styleUrl>#style_mal</styleUrl>
+      <Point><coordinates>2.651,39.747,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Gran Folies — Port d'Andratx</name>
+      <description>🌊 Mallorca Leg 2 · May 19 · Dinner 7PM
+Port d'Andratx · ⭐4.4 · ~€55–75/person
+URGENT — book now · granfolies.com · +34 971 671 094</description>
+      <styleUrl>#style_mal</styleUrl>
+      <Point><coordinates>2.388,39.539,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Steve Rogers Catamaran — La Lonja Marina</name>
+      <description>⛵ Mallorca Leg 2 · May 20 · 11AM–3PM
+La Lonja Marina, central Palma
+2021 Fountaine Pajot · Max 10 guests
+Champagne welcome + tapas + full bar on board
+Book on Viator or sailpalma.com · BOOK NOW</description>
+      <styleUrl>#style_mal</styleUrl>
+      <Point><coordinates>2.643,39.568,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Fervor Palma</name>
+      <description>🍷 Mallorca Leg 2 · May 20 · Dinner 7:30PM
+Carrer de Can Verí 4, Palma Old Town · ⭐4.5
+Modern Spanish cuisine · great for groups · ~€35–50/person
+grupocardon.com/restaurantes/fervor</description>
+      <styleUrl>#style_mal</styleUrl>
+      <Point><coordinates>2.648,39.57,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>After Landing / Chapeau Palma</name>
+      <description>🍸 Mallorca Leg 2 · May 20 · Late Night
+Palma Old Town · Both within walking distance
+After Landing Cocktail Art — 5★, free welcome shot, open until 1AM
+Chapeau Palma — Top 500 worldwide, open until 2AM</description>
+      <styleUrl>#style_mal</styleUrl>
+      <Point><coordinates>2.647,39.571,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>La Seu Cathedral</name>
+      <description>🕌 Mallorca Leg 2 · May 21 · Morning
+Palma · €9 · Book to skip queues
+catedraldemallorca.org</description>
+      <styleUrl>#style_mal</styleUrl>
+      <Point><coordinates>2.65,39.567,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>Leg 3 — Ibiza (May 21–23)</name>
+    <open>1</open>
+    <Placemark>
+      <name>Blue Marlin Ibiza</name>
+      <description>🏖️ Ibiza Leg 3 · May 21 · 5PM
+Cala Jondal · ⭐4.4
+Iconic beach club — sunset DJ sets, luxury sun beds, fresh seafood
+Book loungers/table for 8 · bluemarlinibiza.com · +34 971 410 117</description>
+      <styleUrl>#style_ibz</styleUrl>
+      <Point><coordinates>1.397,38.872,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Ushuaïa Ibiza</name>
+      <description>🎉 Ibiza Leg 3 · May 21 · 10PM
+Ctra. de Platja d'en Bossa 10 · ⭐4.3
+Open-air poolside superclub · ~€50–80/person
+Pre-book tickets · theushuaiaexperience.com</description>
+      <styleUrl>#style_ibz</styleUrl>
+      <Point><coordinates>1.413,38.879,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Zazú Beach Club</name>
+      <description>🏖️ Ibiza Leg 3 · May 22 · Full Day
+Carrer del Fumarell 2 · ⭐4.4
+Sun loungers, cocktails, live entertainment · Book for 8
+zazuibiza.com</description>
+      <styleUrl>#style_ibz</styleUrl>
+      <Point><coordinates>1.41,38.883,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Calma Marina — Lunch</name>
+      <description>🐟 Ibiza Leg 3 · May 22 · Lunch
+Ibiza Marina · Fresh seafood lunch
+Walk-in friendly</description>
+      <styleUrl>#style_ibz</styleUrl>
+      <Point><coordinates>1.436,38.906,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>El Chiringuito Es Cavallet</name>
+      <description>🦞 Ibiza Leg 3 · May 22 · Dinner
+Playa Es Cavallet · ⭐4.5 · ~€50–70/person
+Whole grilled fish, lobster rice, fresh seafood on the sand
+Book for 8 · elchiringuitoescavallet.com</description>
+      <styleUrl>#style_ibz</styleUrl>
+      <Point><coordinates>1.406,38.87,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Pacha Ibiza</name>
+      <description>🎵 Ibiza Leg 3 · May 22 · Night
+Av. 8 d'Agost · ⭐4.2 · ~€50–80
+Legendary club · Pre-book drinks package online
+pacha.com</description>
+      <styleUrl>#style_ibz</styleUrl>
+      <Point><coordinates>1.44,38.908,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+  <Folder>
+    <name>Leg 4 — Barcelona Finale (May 23–25)</name>
+    <open>1</open>
+    <Placemark>
+      <name>La Selva Barcelona</name>
+      <description>🥩 BCN Finale Leg 4 · May 23 · ~6PM
+Carrer de Còrsega 235 · ⭐4.8 · ~€45–60/person
+Book for 4 · laselvabarcelona.es</description>
+      <styleUrl>#style_fin</styleUrl>
+      <Point><coordinates>2.158,41.396,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Estadi Olímpic — Bad Bunny</name>
+      <description>🎤 BCN Finale Leg 4 · May 23 · Concert Night
+Estadi Olímpic Lluís Companys
+Book tickets NOW — Ticketmaster.es / Livenation.es / StubHub</description>
+      <styleUrl>#style_fin</styleUrl>
+      <Point><coordinates>2.157,41.364,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Passeig de Gràcia</name>
+      <description>🛍️ BCN Finale Leg 4 · May 24 · Shopping
+Barcelona's most iconic boulevard
+Louis Vuitton, Chanel, Gucci, Zara flagship all here</description>
+      <styleUrl>#style_fin</styleUrl>
+      <Point><coordinates>2.165,41.392,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Tapeo El Born</name>
+      <description>🍷 BCN Finale Leg 4 · May 24 · Lunch
+Carrer de Montcada 29 · ⭐4.5 · ~€25–35/person
+Best pintxos bar in El Born</description>
+      <styleUrl>#style_fin</styleUrl>
+      <Point><coordinates>2.181,41.383,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Gothic Quarter Free Walking Tour</name>
+      <description>🏛️ BCN Finale Leg 4 · May 24 · 2PM
+Free (tips only) · ⭐5.0
+freewalkingtoursbarcelona.com · Meet at Plaça de la Catalunya</description>
+      <styleUrl>#style_fin</styleUrl>
+      <Point><coordinates>2.175,41.382,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Arcano Restaurant Cave</name>
+      <description>🍽️ BCN Finale Leg 4 · May 24 · Farewell Dinner 7:30PM
+Carrer dels Mercaders 10 · ⭐4.6 · ~€50–80/person
+arcanobarcelona.com</description>
+      <styleUrl>#style_fin</styleUrl>
+      <Point><coordinates>2.176,41.383,0</coordinates></Point>
+    </Placemark>
+  </Folder>
+</Document>
+</kml>
