@@ -3249,6 +3249,112 @@
 </script>
 
 
+<script>
+// ─── GOOGLE MAPS — global scope so API callback works ───────────────────────
+const LEG_COLORS = { bcn:'#D4385A', mal:'#1E8C6A', ibz:'#2E86AB', fin:'#7B5EA7' };
+const LEG_LABELS = {
+  bcn:'Leg 1 — Barcelona', mal:'Leg 2 — Mallorca',
+  ibz:'Leg 3 — Ibiza',     fin:'Leg 4 — BCN Finale'
+};
+let gmap, gmarkers = [], openInfoWindow = null;
+
+function initGoogleMap() {
+  const mapEl = document.getElementById('gmap-live');
+  if (!mapEl) return;
+
+  const darkStyle = [
+    { elementType:'geometry',          stylers:[{color:'#1a2535'}] },
+    { elementType:'labels.text.stroke',stylers:[{color:'#1a2535'}] },
+    { elementType:'labels.text.fill',  stylers:[{color:'#8A7F78'}] },
+    { featureType:'water',  elementType:'geometry', stylers:[{color:'#0f1923'}] },
+    { featureType:'road',   elementType:'geometry', stylers:[{color:'#2d3748'}] },
+    { featureType:'road',   elementType:'labels.text.fill', stylers:[{color:'#6B7280'}] },
+    { featureType:'poi',    stylers:[{visibility:'off'}] },
+    { featureType:'transit',stylers:[{visibility:'off'}] },
+    { featureType:'administrative', elementType:'geometry', stylers:[{color:'#2d3748'}] },
+    { featureType:'administrative.country', elementType:'labels.text.fill', stylers:[{color:'#C9A84C'}] },
+    { featureType:'landscape', elementType:'geometry', stylers:[{color:'#1e2d3d'}] },
+  ];
+
+  gmap = new google.maps.Map(mapEl, {
+    zoom: 6,
+    center: { lat: 40.2, lng: 2.0 },
+    styles: darkStyle,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: true,
+    zoomControlOptions: { position: google.maps.ControlPosition.RIGHT_TOP },
+  });
+
+  // Build markers from VENUES array (defined in main script)
+  if (typeof VENUES === 'undefined') return;
+
+  VENUES.forEach(v => {
+    const color = LEG_COLORS[v.leg] || '#C9A84C';
+    const svgPin = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
+      <path d="M16 0C7.16 0 0 7.16 0 16c0 10.84 16 24 16 24s16-13.16 16-24C32 7.16 24.84 0 16 0z" fill="${color}"/>
+      <circle cx="16" cy="16" r="7" fill="white" opacity="0.9"/>
+    </svg>`;
+
+    const marker = new google.maps.Marker({
+      position: { lat: v.lat, lng: v.lon },
+      map: gmap,
+      title: v.name,
+      icon: {
+        url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svgPin),
+        scaledSize: new google.maps.Size(28, 35),
+        anchor: new google.maps.Point(14, 35),
+      },
+    });
+    marker.legKey = v.leg;
+
+    const info = new google.maps.InfoWindow({
+      content: `<div style="font-family:sans-serif;padding:4px 2px;min-width:180px;">
+        <div style="font-weight:700;font-size:0.95rem;margin-bottom:3px;">${v.name}</div>
+        <div style="font-size:0.78rem;color:#666;margin-bottom:6px;">${v.type}</div>
+        <div style="font-size:0.7rem;font-weight:700;color:${color};text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;">${LEG_LABELS[v.leg]||''}</div>
+        <a href="https://www.google.com/maps/search/${encodeURIComponent(v.query)}" target="_blank"
+           style="display:inline-block;padding:5px 12px;background:${color};color:white;border-radius:4px;font-size:0.75rem;font-weight:600;text-decoration:none;">
+          Open in Maps →
+        </a></div>`
+    });
+
+    marker.addListener('click', () => {
+      if (openInfoWindow) openInfoWindow.close();
+      info.open(gmap, marker);
+      openInfoWindow = info;
+    });
+
+    gmarkers.push(marker);
+  });
+
+  fitGmapBounds('all');
+}
+
+function fitGmapBounds(leg) {
+  if (!gmap || !gmarkers.length) return;
+  const bounds = new google.maps.LatLngBounds();
+  gmarkers.forEach(m => { if (leg === 'all' || m.legKey === leg) bounds.extend(m.getPosition()); });
+  if (!bounds.isEmpty()) gmap.fitBounds(bounds, 50);
+}
+
+function filterGmapLeg(leg) {
+  gmarkers.forEach(m => m.setVisible(leg === 'all' || m.legKey === leg));
+  fitGmapBounds(leg);
+}
+
+// Hook filter buttons to also update the live map
+document.addEventListener('DOMContentLoaded', () => {
+  const legMap = { 'all':'all', 'bcn-f':'bcn', 'mal-f':'mal', 'ibz-f':'ibz', 'fin-f':'fin' };
+  document.querySelectorAll('.map-filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const key = [...this.classList].find(cl => legMap[cl]);
+      if (key) filterGmapLeg(legMap[key]);
+    });
+  });
+});
+</script>
+
 <!-- Google Maps JavaScript API — replace AIzaSyAp7rpV302in_lDvRh27xMxvBwGTCO0iaE with your key -->
 <!-- Get a free key at: console.cloud.google.com/google/maps-apis/credentials -->
 <!-- Enable: Maps JavaScript API -->
