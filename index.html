@@ -3847,6 +3847,86 @@
   window.addEventListener('scroll', applyParallax, { passive: true });
   applyParallax();
 
+  // ─── ACTIVITY SIGN-UPS ───────────────────────────────────────────────────
+  let activityCache = {};
+
+  async function fetchActivities() {
+    try {
+      const res  = await fetch(RSVP_API + '?type=activities');
+      const json = await res.json();
+      if (json.ok && json.activities) {
+        activityCache = json.activities;
+        renderAllSignups();
+      }
+    } catch { /* offline — use cached */ }
+  }
+
+  async function postActivity(eventId, name, action) {
+    try {
+      await fetch(RSVP_API, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'activity', eventId, name, action })
+      });
+    } catch {}
+  }
+
+  function renderAllSignups() {
+    document.querySelectorAll('[data-eid]').forEach(nameEl => {
+      const eid    = nameEl.getAttribute('data-eid');
+      const names  = activityCache[eid] || [];
+      const countEl = document.getElementById('signup-count-' + eid);
+      const namesEl = document.getElementById('signup-names-' + eid);
+      if (countEl) countEl.textContent = names.length > 0 ? names.length + ' going' : 'Be first';
+      if (!namesEl) return;
+      if (names.length === 0) {
+        namesEl.innerHTML = '<span class="signup-empty-msg">No one signed up yet</span>';
+      } else {
+        namesEl.innerHTML = names.map(n =>
+          `<span class="signup-pill">${n}<span class="signup-pill-remove" onclick="signupRemove('${eid}','${n.replace(/'/g,"\\'")}')">✕</span></span>`
+        ).join('');
+      }
+    });
+  }
+
+  function toggleSignupPanel(eid) {
+    const panel = document.getElementById('signup-panel-' + eid);
+    if (panel) panel.classList.toggle('open');
+  }
+
+  async function signupAdd(eid) {
+    const input = document.getElementById('signup-input-' + eid);
+    if (!input) return;
+    const name = input.value.trim();
+    if (!name) return;
+    if (!activityCache[eid]) activityCache[eid] = [];
+    if (!activityCache[eid].includes(name)) activityCache[eid].push(name);
+    input.value = '';
+    renderAllSignups();
+    setSignupStatus(eid, 'Saving…', 'var(--warm-gray)');
+    await postActivity(eid, name, 'join');
+    setSignupStatus(eid, '✓ Saved!', '#4CAF50');
+    setTimeout(() => setSignupStatus(eid, ''), 2500);
+  }
+
+  async function signupRemove(eid, name) {
+    if (!activityCache[eid]) return;
+    activityCache[eid] = activityCache[eid].filter(n => n !== name);
+    renderAllSignups();
+    await postActivity(eid, name, 'leave');
+  }
+
+  function setSignupStatus(eid, msg, color) {
+    const el = document.getElementById('signup-status-' + eid);
+    if (!el) return;
+    el.textContent = msg;
+    el.style.color = color || 'var(--warm-gray)';
+  }
+
+  fetchActivities();
+  setInterval(fetchActivities, 60000);
+
 </script>
 
 
