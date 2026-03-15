@@ -1613,8 +1613,24 @@
         <div class="event">
           <div class="event-time">9:00 AM</div>
           <div class="event-content">
-            <div class="event-name"><span class="event-icon">⛪</span>Sagrada Família</div>
+            <div class="event-name" data-eid="bcn_sagrada"><span class="event-icon">⛪</span>Sagrada Família</div>
             <div class="event-desc">Book 9AM timed entry at sagradafamilia.org. ~2–2.5 hrs. €26–36/person. No walk-ups — must book online in advance.<br><span class="price">Book online now · sagradafamilia.org</span></div>
+            <div class="event-signup">
+              <button class="signup-toggle" onclick="toggleSignupPanel('bcn_sagrada')">
+                👥 Who's in? <span class="signup-count" id="signup-count-bcn_sagrada">Be first</span>
+              </button>
+              <div class="signup-panel" id="signup-panel-bcn_sagrada">
+                <div class="signup-names" id="signup-names-bcn_sagrada">
+                  <span class="signup-empty-msg">No one signed up yet</span>
+                </div>
+                <div class="signup-input-row">
+                  <input class="signup-name-input" id="signup-input-bcn_sagrada" type="text" placeholder="Your name…" maxlength="24"
+                    onkeydown="if(event.key==='Enter') signupAdd('bcn_sagrada')"/>
+                  <button class="signup-add-btn" onclick="signupAdd('bcn_sagrada')">I'm in ✓</button>
+                </div>
+                <div class="signup-status" id="signup-status-bcn_sagrada"></div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="event">
@@ -1861,24 +1877,8 @@
         <div class="event">
           <div class="event-time">4:00 PM</div>
           <div class="event-content">
-            <div class="event-name" data-eid="mal_oasis"><span class="event-icon">🚗</span>Scenic Drive South — MA-10 Coast Road to Port d'Andratx</div>
+            <div class="event-name"><span class="event-icon">🚗</span>Scenic Drive South — MA-10 Coast Road to Port d'Andratx</div>
             <div class="event-desc">One of Europe's great drives — the MA-10 winds along the Tramuntana coast past the <strong style="color:var(--cream)">Sa Foradada</strong> viewpoint (a dramatic rock needle jutting into the sea — 15 min stop), Banyalbufar terraces and the Port d'Andratx marina. Relax, take in the views, and arrive rested for dinner.<br><span class="price">~1.5 hrs to Port d'Andratx with stops · Free viewpoints</span></div>
-            <div class="event-signup">
-              <button class="signup-toggle" onclick="toggleSignupPanel('mal_oasis')">
-                👥 Who's in? <span class="signup-count" id="signup-count-mal_oasis">Be first</span>
-              </button>
-              <div class="signup-panel" id="signup-panel-mal_oasis">
-                <div class="signup-names" id="signup-names-mal_oasis">
-                  <span class="signup-empty-msg">No one signed up yet</span>
-                </div>
-                <div class="signup-input-row">
-                  <input class="signup-name-input" id="signup-input-mal_oasis" type="text" placeholder="Your name…" maxlength="24"
-                    onkeydown="if(event.key==='Enter') signupAdd('mal_oasis')"/>
-                  <button class="signup-add-btn" onclick="signupAdd('mal_oasis')">I'm in ✓</button>
-                </div>
-                <div class="signup-status" id="signup-status-mal_oasis"></div>
-              </div>
-            </div>
           </div>
         </div>
         <div class="event">
@@ -1932,7 +1932,7 @@
         <div class="event">
           <div class="event-time">9:30 AM<br>– 2:00 PM</div>
           <div class="event-content">
-            <div class="event-name"><span class="event-icon">⛵</span>Oasis Blue Catamaran — BBQ &amp; Drinks · Top 10% TripAdvisor</div>
+            <div class="event-name" data-eid="mal_oasis"><span class="event-icon">⛵</span>Oasis Blue Catamaran — BBQ &amp; Drinks · Top 10% TripAdvisor</div>
             <div class="event-desc">
               13.6m catamaran, two-level deck — sun deck on top, shaded bar and dining area below. Small group, never overcrowded. Sail out of Palma Bay with the Cathedral behind you.<br><br>
               <strong style="color:var(--cream)">Stop 1 — Swim &amp; Snorkel:</strong> Anchor in a turquoise bay for swimming, snorkelling and paddleboarding. Crystal-clear Mediterranean water off the boat.<br>
@@ -1948,6 +1948,22 @@
               <a href="https://api.whatsapp.com/send?phone=34649020520" target="_blank" style="display:inline-block;margin-top:8px;padding:9px 18px;background:rgba(30,140,106,0.15);border:1px solid rgba(30,140,106,0.4);color:#5FD4A8;border-radius:6px;font-weight:600;font-size:0.82rem;text-decoration:none;font-family:'DM Sans'">💬 WhatsApp +34 649 020 520 →</a>
             </div>
           </div>
+            <div class="event-signup">
+              <button class="signup-toggle" onclick="toggleSignupPanel('mal_oasis')">
+                👥 Who's in? <span class="signup-count" id="signup-count-mal_oasis">Be first</span>
+              </button>
+              <div class="signup-panel" id="signup-panel-mal_oasis">
+                <div class="signup-names" id="signup-names-mal_oasis">
+                  <span class="signup-empty-msg">No one signed up yet</span>
+                </div>
+                <div class="signup-input-row">
+                  <input class="signup-name-input" id="signup-input-mal_oasis" type="text" placeholder="Your name…" maxlength="24"
+                    onkeydown="if(event.key==='Enter') signupAdd('mal_oasis')"/>
+                  <button class="signup-add-btn" onclick="signupAdd('mal_oasis')">I'm in ✓</button>
+                </div>
+                <div class="signup-status" id="signup-status-mal_oasis"></div>
+              </div>
+            </div>
         </div>
         <div class="event">
           <div class="event-time">2:00 – 4:00 PM</div>
